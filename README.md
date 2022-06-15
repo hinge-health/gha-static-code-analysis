@@ -9,7 +9,7 @@ name: Static Code Analysis
 
 on: 
     pull_request:
-        types: ['opened', 'edited', 'reopened', 'synchronize']
+        types: [opened, edited, reopened, synchronize]
     push:
         branches: [ main ]
 
