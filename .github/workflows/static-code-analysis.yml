@@ -1,0 +1,14 @@
+name: SonarQube Static Code Analysis
+
+on:
+  workflow_call:
+
+jobs:
+  static_code_analysis:
+        name: SonarQube Static Code Analysis Scan
+        runs-on: ubuntu-latest
+        steps:
+        - uses: sonarsource/sonarqube-scan-action@master
+          env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_DEV }} # Set as an organization secret
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} # Set as an organization secret
