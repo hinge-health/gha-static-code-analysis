@@ -2,38 +2,13 @@ name: SonarQube Static Code Analysis
 
 on:
   workflow_call:
-    inputs:
-      code_coverage_command:
-        description: 'The command to output the code coverage reports'
-        required: false
-        type: string
 
 jobs:
-  generate_coverage_report:
-    name: Generate Coverage Report
-    runs-on: ubuntu-latest
-    if: ${{ inputs.code_coverage_command != '' }}
-    env:
-      GITHUB_ACCESS_TOKEN: ${{ secrets.shared_packages_read_token }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Setup Node JS using .nvmrc
-        uses: actions/setup-node@v2
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
-        run: npm ci
-      - name: Test Coverage # this step will be slow (no in parallel)
-        run: ${{ inputs.code_coverage_command }}
   static_code_analysis:
         name: SonarQube Static Code Analysis Scan
         runs-on: ubuntu-latest
-        if: ${{ always() }}
-        needs: [nodejs_test]
         steps:
         - uses: sonarsource/sonarqube-scan-action@master
           env:
-            SONAR_TOKEN: ${{ inputs.SONAR_TOKEN_DEV }} # Set as an organization secret
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_DEV }} # Set as an organization secret
             SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} # Set as an organization secret
