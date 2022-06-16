@@ -19,6 +19,13 @@ straightforward as possible.
   Ticket title goes here.
 -->
 
+## [2] - 2022-06-15
+
+### Feature
+- [QE-159](https://hingehealth.atlassian.net/browse/QE-159)
+- GHA `static-code-analysis.yml` has inputs and secrets that need to be injected.
+- GHA `static-code-analysis.yml` has a download artifact and checkout step.
+
 ## [1.0.1] - 2022-06-15
 
 ### Fix
