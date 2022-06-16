@@ -25,7 +25,7 @@ straightforward as possible.
 - [QE-159](https://hingehealth.atlassian.net/browse/QE-159)
 - Fix GHA action `static-code-analysis.yml` to include checkout step before running scanner.
 
-## [1.0.0] - 2022-06-15
+## [1] - 2022-06-15
 
 ### Feature
 - [QE-159](https://hingehealth.atlassian.net/browse/QE-159)
