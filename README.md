@@ -16,6 +16,9 @@ on:
 jobs:
   static-code-analysis-scanner:
     uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    with:
+      coverage_artifact: coverage.xml
+    secrets: inherit
 ```
 
 It is also a good idea to pin reference to a particular tag instead of `@main` so that if a breaking change is made in the future it will not break your deploy.
@@ -31,5 +34,8 @@ on:
 
 jobs:
   static-code-analysis-scanner:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@v1.0.0
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@v1
+    with:
+      coverage_artifact: coverage.xml
+    secrets: inherit
 ```
