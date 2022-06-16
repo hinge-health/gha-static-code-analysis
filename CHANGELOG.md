@@ -19,7 +19,7 @@ straightforward as possible.
   Ticket title goes here.
 -->
 
-## [2] - 2022-06-15
+## [2] - 2022-06-16
 
 ### Feature
 - [QE-159](https://hingehealth.atlassian.net/browse/QE-159)
