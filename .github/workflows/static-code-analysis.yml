@@ -26,7 +26,7 @@ jobs:
         # bug in SonarQube when parsing ruby coverage reports need to change the path location
         # in the file or else no coverage data will display in SonarQube
         - name: Parse file
-          if: inputs.coverage_artifact == coverage.xml || inputs.coverage_artifact == .resultset.json
+          if: inputs.coverage_artifact == 'coverage.xml' || inputs.coverage_artifact == '.resultset.json'
           run: |
             ls -a
             pwd
