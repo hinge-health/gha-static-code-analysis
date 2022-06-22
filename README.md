@@ -4,11 +4,11 @@ This repository will contain the set of Github Action workflows pertaining to st
 
 ## Static Code Analysis Workflow
 
-The `static-code-analysis.yml` workflow uses SonarSources [scanner action](https://github.com/SonarSource/sonarqube-scan-action) to scan the code base of a repository based on the calling workflows `on` action, and sends the static code analysis and code coverage data to a SonarQube/SonarCloud instance.
+The `static-code-analysis.yml` workflow uses SonarSources [scanner action](https://github.com/SonarSource/sonarqube-scan-action) to scan the code base of a repository based on a calling workflow `on` action, and sends the static code analysis and code coverage data to a SonarQube/SonarCloud instance.
 
-For more information on what SonarQube is please refer to this [guru](https://fixme.com) document.
+For more information on what SonarQube is please read over this guru card: [SonarQube - Static Code Analysis Tool](https://app.getguru.com/card/ca87zp4i/SonarQube-Static-Code-Analysis-Tool-)
 
-This workflow will `NOT` cause builds or pr's to fail if static code analysis scanner fails to pass the quality profile set for the underlying repository. This reusable action is only meant to display PR decorations and send static code analysis data to the companys SonarQube instance.
+This workflow will `NEVER` cause builds or pull requests to fail if the action reports failures based on the quality profile set for the repository. This reusable action is only meant to display pull request decorations and send static code analysis data to the companies SonarQube instance.
 
 ### How to use the `static-code-analysis.yml` workflow
 
@@ -18,10 +18,10 @@ This workflow will `NOT` cause builds or pr's to fail if static code analysis sc
 
 - The working repository contains a GHA workflow that generates a coverage report and uploads the artifact using the [upload-artifact](https://github.com/actions/upload-artifact) action.
   - For repositories that generate multiple coverage reports the coverage reports `must` combine to a single file before uploading the artifact.
-  - Coverage report artifacts `must` follow the naming conventions based on the underlying source code language of the repository. SonarQubes code coverage propeties looks for specific naming conventions for the coverage reports.
-    - `typescript|javascript|react|react-native` : must be set to lcov.info 
-    - `python` : must be set to coverage.xml
-    - `ruby`   : must be set to either [ .resultset.json | coverage.json ] read the [Example workflow for `ruby` source code repositories](#example-workflow-ruby) for information on what file to choose from.
+  - Coverage report artifacts `must` follow specific naming convention guidelines based on the underlying source code language of the repository. If the naming convention is incorrect, then the SonarQube scanner will not detect the coverage report.
+    - `typescript|javascript|react|react-native` : must be set to `lcov.info` 
+    - `python` : must be set to `coverage.xml`
+    - `ruby`   : must be set to either `[ .resultset.json | coverage.json ]` read the [Example workflow for `ruby` source code repositories](#example-workflow-ruby) for information on what file to choose from.
 
 
 ### [Example workflow for `typescript|javascript|react|react-native` source code repositories](#example-workflow-nodejs)
