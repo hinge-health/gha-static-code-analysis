@@ -21,10 +21,10 @@ This workflow will `NEVER` cause builds or pull requests to fail if the action r
   - Coverage report artifacts `must` follow specific naming convention guidelines based on the underlying source code language of the repository. If the naming convention is incorrect, then the SonarQube scanner will not detect the coverage report.
     - `typescript|javascript|react|react-native` : must be set to `lcov.info` 
     - `python` : must be set to `coverage.xml`
-    - `ruby`   : must be set to either `[ .resultset.json | coverage.json ]` read the [Example workflow for `ruby` source code repositories](#example-workflow-for-ruby-source-code-repositories) for information on what file to choose from.
+    - `ruby`   : must be set to either `[ .resultset.json | coverage.json ]` read the [Example workflow for `ruby` source code repositories] (#example-workflow-for-ruby-source-code-repositories) for information on what file name to choose from.
 
 
-### [Example workflow for `typescript|javascript|react|react-native` source code repositories](#example-workflow-nodejs)
+### Example workflow for `typescript|javascript|react|react-native` source code repositories
 
 ```yml
 name: Static Code Analysis
@@ -48,7 +48,7 @@ jobs:
     needs: [FIXME] # Job name that generates coverage report 
 ```
 
-### [Example workflow for `python` source code repositories](#example-workflow-python)
+### Example workflow for `python` source code repositories
 
 ```yml
 name: Static Code Analysis
@@ -73,13 +73,13 @@ jobs:
 ```
 ### Example workflow for `ruby` source code repositories
 
-For ruby repositories teams will need to use the [simplecov](#https://github.com/simplecov-ruby/simplecov) dependency to generate the coverage report file
+For ruby repositories teams will need to use the [simplecov](https://github.com/simplecov-ruby/simplecov) dependency to generate the coverage report file
 and set the `coverage_artifact` variable to the filename.
 
-- For simplecov <= v0.20.0 set `coverage_artifact` field to .resultset.json
-- simplecov >= v0.20.0 set `coverage_artifact` field to coverage.json
+- For simplecov versions before 0.18 set `coverage_artifact` field to the .resultset.json file
+- For simplecov versions after v0.18.0 use the simplecov [JSON formatter](https://github.com/simplecov-ruby/simplecov#json-formatter) to generate the coverage.json file and set the `coverage_artifact` field to coverage.json
 
-#### Simplecov versions <= v0.20.0
+#### Simplecov versions <= v0.18.0
 
 ```yml
 name: Static Code Analysis
@@ -103,7 +103,7 @@ jobs:
     needs: [FIXME] # Job name that generates coverage report 
 ```
 
-#### Simplecov versions <= v0.20.0
+#### Simplecov versions > v0.18.0
 
 ```yml
 name: Static Code Analysis
