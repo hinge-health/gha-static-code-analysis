@@ -33,7 +33,7 @@ on:
     pull_request:
         types: [opened, synchronize]
     push:
-        branches: [ main ]
+        branches: [main]
 
 jobs:
   # Job to generate and upload coverage reports goes here
@@ -57,7 +57,7 @@ on:
     pull_request:
         types: [opened, synchronize]
     push:
-        branches: [ main ]
+        branches: [main]
 
 jobs:
   # Job to generate and upload coverage reports goes here
@@ -116,7 +116,7 @@ on:
 
 jobs:
   # Job to generate and upload coverage reports goes here
-  # be sure to upload the coverage report with the file name .resultset.json
+  # be sure to upload the coverage report with the file name coverage.json
 
   static_code_analysis:
     uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
