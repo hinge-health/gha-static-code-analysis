@@ -29,7 +29,7 @@ jobs:
         # When scan is complete the code coverage does not display on SonarQube and warning logs
         # are displayed in the command output within the github agent.
         # Fix - updated the path value within the file if it is either `coverage.json | .resultset.json `
-        - if: inputs.coverage_artifact == 'coverage.json' || inputs.coverage_artifact == '.resultset.json'
+        - if: inputs.coverage_artifact == 'coverage.json' || inputs.coverage_artifact == '.resultset.json' || inputs.coverage_artifact == 'coverage.xml'
           run: sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' $COVERAGE_REPORT
         # Performs the SonarQube static code analysis scan
         - uses: sonarsource/sonarqube-scan-action@master
