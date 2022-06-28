@@ -5,7 +5,7 @@ on:
     inputs:
       coverage_artifact:
         description: 'The coverage report artifact file name or path to download from the workflow container.'
-        required: true
+        required: false
         type: string
 
 jobs:
@@ -20,16 +20,17 @@ jobs:
             fetch-depth: 0
         # Downloads the coverage report artifact
         - uses: actions/download-artifact@v3
+          if: inputs.coverage_artifact != '' 
           with:
             name: ${{ inputs.coverage_artifact }}
-        # SonarQube bug - If artifact is `coverage.json | .resultset.json ` the file needs to be edited
+        # SonarQube bug - If artifact is `coverage.json | .resultset.json | coverage.xml ` the file needs to be edited
         # bug in SonarQube GHA scanner when parsing for ruby coverage reports
         # the path value is incorrect in the coverage report and not pointing to the correct 
         # directory where the source code lives in within the Github actions agent
         # When scan is complete the code coverage does not display on SonarQube and warning logs
         # are displayed in the command output within the github agent.
         # Fix - updated the path value within the file if it is either `coverage.json | .resultset.json `
-        - if: inputs.coverage_artifact == 'coverage.json' || inputs.coverage_artifact == '.resultset.json'
+        - if: inputs.coverage_artifact == 'coverage.json' || inputs.coverage_artifact == '.resultset.json' || inputs.coverage_artifact == 'coverage.xml'
           run: sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' $COVERAGE_REPORT
         # Performs the SonarQube static code analysis scan
         - uses: sonarsource/sonarqube-scan-action@master
