@@ -34,7 +34,7 @@ on:
 
 jobs:
   static_code_analysis:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
     secrets: inherit
 ```
 
@@ -54,7 +54,7 @@ jobs:
   # be sure to upload the coverage report with the file name lcov.info
 
   static_code_analysis:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
     with:
       coverage_artifact: lcov.info
     secrets: inherit
@@ -78,7 +78,7 @@ jobs:
   # be sure to upload the coverage report with the file name coverage.xml
 
   static_code_analysis:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
     with:
       coverage_artifact: coverage.xml
     secrets: inherit
@@ -109,7 +109,7 @@ jobs:
   # be sure to upload the coverage report with the file name .resultset.json
 
   static_code_analysis:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
     with:
       coverage_artifact: .resultset.json
     secrets: inherit
@@ -133,7 +133,7 @@ jobs:
   # be sure to upload the coverage report with the file name coverage.json
 
   static_code_analysis:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
     with:
       coverage_artifact: coverage.json
     secrets: inherit
