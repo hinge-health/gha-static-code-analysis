@@ -16,15 +16,12 @@ This workflow will `NEVER` cause builds or pull requests to fail if the action r
 
 - A SonarQube project has been created and binded to the working repository
 
-- The working repository contains a GHA workflow that generates a coverage report and uploads the artifact using the [upload-artifact](https://github.com/actions/upload-artifact) action.
+- For any team that would like to view the code coverage of their repository, the repository `must` contain a GHA workflow that generates the coverage report and uploads the report using the shared github [upload-artifact](https://github.com/actions/upload-artifact) action.
   - For repositories that generate multiple coverage reports the coverage reports `must` combine to a single file before uploading the artifact.
   - Coverage report artifacts `must` follow specific naming convention guidelines based on the underlying source code language of the repository. If the naming convention is incorrect, then the SonarQube scanner will not detect the coverage report.
     - `typescript|javascript|react|react-native` : must be set to `lcov.info` 
     - `python` : must be set to `coverage.xml`
-    - `ruby`   : must be set to either `[ .resultset.json | coverage.json ]` read the [Example workflow for `ruby` source code repositories] (#example-workflow-for-ruby-source-code-repositories) for information on what file name to choose from.
-
-
-### Example workflow for `typescript|javascript|react|react-native` source code repositories
+    - `ruby`   : must be set to either `[ .resultset.json | coverage.json ]` read the [Example workflow for `ruby` source code repositories](#example-workflow-for-ruby-source-code-repositories) for more information on what file name to choose from.
 
 ```yml
 name: Static Code Analysis
@@ -36,11 +33,28 @@ on:
         branches: [ main ]
 
 jobs:
+  static_code_analysis:
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
+    secrets: inherit
+```
+
+### Example workflow for `typescript|javascript|react|react-native` source code repositories
+
+```yml
+name: Static Code Analysis
+
+on: 
+    pull_request:
+        types: [opened, synchronize]
+    push:
+        branches: [main]
+
+jobs:
   # Job to generate and upload coverage reports goes here
   # be sure to upload the coverage report with the file name lcov.info
 
   static_code_analysis:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
     with:
       coverage_artifact: lcov.info
     secrets: inherit
@@ -57,14 +71,14 @@ on:
     pull_request:
         types: [opened, synchronize]
     push:
-        branches: [ main ]
+        branches: [main]
 
 jobs:
   # Job to generate and upload coverage reports goes here
   # be sure to upload the coverage report with the file name coverage.xml
 
   static_code_analysis:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
     with:
       coverage_artifact: coverage.xml
     secrets: inherit
@@ -76,8 +90,8 @@ jobs:
 For ruby repositories teams will need to use the [simplecov](https://github.com/simplecov-ruby/simplecov) dependency to generate the coverage report file
 and set the `coverage_artifact` variable to the filename.
 
-- For simplecov versions before 0.18 set `coverage_artifact` field to the .resultset.json file
-- For simplecov versions after v0.18.0 use the simplecov [JSON formatter](https://github.com/simplecov-ruby/simplecov#json-formatter) to generate the coverage.json file and set the `coverage_artifact` field to coverage.json
+- For simplecov versions before v0.18 set `coverage_artifact` field to the `.resultset.json`
+- For simplecov versions after v0.18 use the simplecov [JSON formatter](https://github.com/simplecov-ruby/simplecov#json-formatter) to format the coverage report and set the `coverage_artifact` field to `coverage.json`
 
 #### Simplecov versions <= v0.18.0
 
@@ -95,7 +109,7 @@ jobs:
   # be sure to upload the coverage report with the file name .resultset.json
 
   static_code_analysis:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
     with:
       coverage_artifact: .resultset.json
     secrets: inherit
@@ -116,10 +130,10 @@ on:
 
 jobs:
   # Job to generate and upload coverage reports goes here
-  # be sure to upload the coverage report with the file name .resultset.json
+  # be sure to upload the coverage report with the file name coverage.json
 
   static_code_analysis:
-    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@main
+    uses: hinge-health/gha-static-code-analysis/.github/workflows/static-code-analysis.yml@[latest-tag]
     with:
       coverage_artifact: coverage.json
     secrets: inherit

@@ -18,6 +18,11 @@ straightforward as possible.
  - [INFRA-1337](https://hingehealth.atlassian.net/browse/INFRA-1337)
   Ticket title goes here.
 -->
+## [2.1.0] - 2022-06-26
+
+### Feature
+- [QE-159](https://hingehealth.atlassian.net/browse/QE-159)
+- GHA `static-code-analysis.yml` coverage_artifact parameter is now optional
 
 ## [2] - 2022-06-16
 
