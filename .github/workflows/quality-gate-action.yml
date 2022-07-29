@@ -34,6 +34,8 @@ jobs:
         run: sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' $COVERAGE_REPORT
       # Performs the SonarQube static code analysis scan
       - uses: sonarsource/sonarqube-quality-gate-action@master
+        # Force to fail step after specific time.
+        timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_DEV }} # Set as an organization secret
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} # Set as an organization secret
